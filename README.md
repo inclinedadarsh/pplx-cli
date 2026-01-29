@@ -103,9 +103,6 @@ Search the web using Perplexity.
 # Basic search
 pplx search "climate change research"
 
-# Academic search
-pplx search "machine learning papers" --mode academic
-
 # Limit results
 pplx search "tech news" --limit 5
 
@@ -115,15 +112,22 @@ pplx search "breaking news" --recency day
 # Filter by domain
 pplx search "AI news" --domain techcrunch.com
 
+# Filter by language
+pplx search "news" --language en --language fr
+
+# Filter by country
+pplx search "local events" --country US
+
 # Output as JSON
 pplx search "query" --json
 ```
 
 **Options:**
 - `-l, --limit <number>` - Maximum number of results (default: 10)
-- `-m, --mode <mode>` - Search mode (web, academic, sec)
 - `-r, --recency <recency>` - Filter by recency (hour, day, week, month, year)
 - `-d, --domain <domains...>` - Filter by domain(s)
+- `--language <languages...>` - Filter by language(s) using ISO codes (e.g., en, fr, de)
+- `--country <code>` - Filter by country using ISO code (e.g., US, GB, IN)
 - `-j, --json` - Output raw JSON response
 
 ### `pplx chat`
