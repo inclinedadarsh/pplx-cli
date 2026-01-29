@@ -16,7 +16,7 @@ export class PerplexityClient {
         this.apiKey = apiKey;
     }
 
-    private getHeaders(): HeadersInit {
+    private getHeaders(): Record<string, string> {
         return {
             'Authorization': `Bearer ${this.apiKey}`,
             'Content-Type': 'application/json',
@@ -38,7 +38,7 @@ export class PerplexityClient {
             throw new Error(`API request failed: ${response.status} - ${error}`);
         }
 
-        return response.json();
+        return response.json() as Promise<ChatCompletionResponse>;
     }
 
     async *chatCompletionStream(request: ChatCompletionRequest): AsyncGenerator<ChatCompletionStreamChunk> {
@@ -91,10 +91,15 @@ export class PerplexityClient {
     }
 
     async search(request: SearchRequest): Promise<SearchResponse> {
+        // Filter out undefined values to avoid sending them to the API
+        const cleanRequest = Object.fromEntries(
+            Object.entries(request).filter(([_, v]) => v !== undefined)
+        );
+
         const response = await fetch(`${API_BASE_URL}/search`, {
             method: 'POST',
             headers: this.getHeaders(),
-            body: JSON.stringify(request),
+            body: JSON.stringify(cleanRequest),
         });
 
         if (!response.ok) {
@@ -102,7 +107,7 @@ export class PerplexityClient {
             throw new Error(`API request failed: ${response.status} - ${error}`);
         }
 
-        return response.json();
+        return response.json() as Promise<SearchResponse>;
     }
 
     // Helper method for simple chat

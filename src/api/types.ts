@@ -74,11 +74,14 @@ export interface ChatCompletionRequest {
 }
 
 export interface SearchRequest {
-    query: string;
+    query: string | string[];
     max_results?: number;
+    max_tokens?: number;
+    max_tokens_per_page?: number;
     search_recency_filter?: 'hour' | 'day' | 'week' | 'month' | 'year';
     search_domain_filter?: string[];
-    search_mode?: 'web' | 'academic' | 'sec';
+    search_language_filter?: string[];
+    country?: string;
 }
 
 // Config Types
