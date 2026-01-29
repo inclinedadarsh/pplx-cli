@@ -1,0 +1,52 @@
+{
+  "name": "pplx-cli",
+  "version": "1.0.0",
+  "description": "A powerful CLI tool for the Perplexity AI API - search the web and chat with AI from your terminal",
+  "author": "Adarsh Dubey",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/inclinedadarsh/pplx-cli.git"
+  },
+  "bugs": {
+    "url": "https://github.com/inclinedadarsh/pplx-cli/issues"
+  },
+  "homepage": "https://github.com/inclinedadarsh/pplx-cli#readme",
+  "keywords": [
+    "perplexity",
+    "ai",
+    "cli",
+    "search",
+    "chat",
+    "terminal",
+    "api"
+  ],
+  "type": "module",
+  "main": "dist/index.js",
+  "bin": {
+    "pplx": "./dist/index.js"
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "bun build src/index.ts --outdir dist --target node",
+    "dev": "bun run src/index.ts",
+    "prepublishOnly": "bun run build"
+  },
+  "devDependencies": {
+    "@types/bun": "latest",
+    "@types/node": "^25.1.0"
+  },
+  "peerDependencies": {
+    "typescript": "^5"
+  },
+  "dependencies": {
+    "chalk": "^5.6.2",
+    "commander": "^14.0.2",
+    "ora": "^9.1.0"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}
